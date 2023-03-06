@@ -1,0 +1,54 @@
+[tool.bandit]
+exclude_dirs = ["migrations", "node_modules", "venv"]
+skips = ["B101"]
+
+[tool.black]
+color = true
+extend-exclude = '''
+/(
+  | migrations
+)/
+'''
+line_length = 119
+target_version = ["py39"]
+
+[tool.isort]
+color_output = true
+extend_skip = ["migrations"]
+line_length = 119
+multi_line_output = 3
+profile = "black"
+py_version = 39
+
+[tool.mypy]
+exclude = ["migrations"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+addopts = "-ra --verbose"
+testpaths = ["test"]
+
+[tool.coverage.run]
+branch = true
+omit = [
+  "tsp/asgi.py",
+  "tsp/version.py",
+  "tsp/wsgi.py",
+  "*/migrations/*",
+  "*/tests/*",
+  "manage.py",
+]
+source = ["tsp"]
+
+[tool.coverage.report]
+show_missing = true
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "if self.debug:",
+  "if settings.DEBUG",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if 0:",
+  "if __name__ == .__main__.:",
+]

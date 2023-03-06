@@ -1,0 +1,31 @@
+version: '3.2'
+
+services:
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: tsp_rabbit
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/tsp/tsp.production.dockerfile
+    container_name: tsp_web
+    restart: on-failure
+    env_file:
+      - .env
+    ports:
+      - 8000
+    depends_on:
+      - rabbit
+
+  worker:
+    build:
+      context: .
+      dockerfile: docker/tsp/tsp.production.dockerfile
+    container_name: tsp_worker
+    restart: on-failure
+    env_file:
+      - .env
+    command: python manage.py run_tsp_solver
+    depends_on:
+      - rabbit
