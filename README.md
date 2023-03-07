@@ -49,6 +49,8 @@ cp .env.sample .env
 ./example.sh docker
 ```
 
+The server should be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/) if everything ran successfully.
+
 ### Without Docker
 
 **Pre-requisites:**
@@ -75,6 +77,8 @@ cp .env.sample .env
 # Start services without docker.
 ./example.sh
 ```
+
+The server should be accessible at [http://127.0.0.1:8000/](http://127.0.0.1:8000/) if everything ran successfully.
 
 **NOTE:** Make sure rabbitmq server is running and correct url is configured in `.env` file before executing `example.sh`.
 
@@ -141,6 +145,25 @@ See [Problem Request Model](#problem-request-model).
 | `id`                | Problem identifier.                       | *UUID (v4)* |
 | `solution_location` | Full url where the solution can be found. | *str*       |
 
+**Sample cURL**:
+
+Assuming the servers are running at [http://127.0.0.1:8000/](http://127.0.0.1:8000/):
+
+```shell
+curl --location 'http://127.0.0.1:8000/api/solve-tsp/' \
+--header 'Content-Type: application/json' \
+--data '{
+  "locations": [
+    [40.74924, 169.19068],
+    [39.28762, 75.30099],
+    [-45.81594, 146.19084],
+    [-35.28499, 22.68073],
+    [16.53802, -148.45893]
+  ],
+  "depot": 2,
+  "num_vehicles": 1
+}'
+```
 
 ### Read API
 
@@ -151,6 +174,14 @@ See [Problem Request Model](#problem-request-model).
 **Response (JSON):**
 
 See [Solution Response Model](#solution-response-model).
+
+**Sample cURL**:
+
+Assuming the servers are running at [http://127.0.0.1:8000/](http://127.0.0.1:8000/) and the problem id is `1b67b5b9-7cd9-47bf-a75e-83d7b07f28d5`:
+
+```shell
+curl --location 'http://127.0.0.1:8000/api/solve-tsp/1b67b5b9-7cd9-47bf-a75e-83d7b07f28d5/'
+```
 
 ## Problem Request Model
 
