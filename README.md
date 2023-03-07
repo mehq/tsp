@@ -3,16 +3,16 @@
 Vehicle routing problem-solving web service.
 
 * [Quickstart](#quickstart)
-  * [Without Docker](#without-docker)
   * [With Docker](#with-docker)
+  * [Without Docker](#without-docker)
 * [Configuration](#configuration)
 * [Design](#design)
   * [API](#api)
   * [Queue](#queue)
   * [Background Worker](#background-worker)
 * [API Documentation](#api-documentation)
-  * [Write API](#span-stylecoloryellow-post-span-write-api)
-  * [Read API](#span-stylecolorgreen-get-span-read-api)
+  * [Write API](#write-api)
+  * [Read API](#read-api)
 * [Request Model (Problem)](#problem-request-model)
 * [Response Model (Solution)](#solution-response-model)
   * [Without Time Constraints](#without-time-constraints)
@@ -122,19 +122,17 @@ The background worker runs independently and does not rely on the API server. It
 
 ## API Documentation
 
-### <span style="color:yellow">POST</span> Write API
+### Write API
 
-**URL**
+**URL:** `{base_url}/api/solve-tsp/`
 
-```text
-{base_url}/api/solve-tsp/
-```
+**Method**: `POST`
 
-**Body <span style="color:gray;">JSON</span>**
+**Body (JSON):**
 
 See [Problem Request Model](#problem-request-model).
 
-**Response <span style="color:gray;">JSON</span>**
+**Response (JSON):**
 
 | Property            | Description                               | Type        |
 |---------------------|-------------------------------------------|-------------|
@@ -142,15 +140,13 @@ See [Problem Request Model](#problem-request-model).
 | `solution_location` | Full url where the solution can be found. | *str*       |
 
 
-### <span style="color:green">GET</span> Read API
+### Read API
 
-**URL**
+**URL:** `{base_url}/api/solve-tsp/{problem_id}/`
 
-```text
-{base_url}/api/solve-tsp/{problem_id}/
-```
+**Method**: `GET`
 
-**Response <span style="color:gray;">JSON</span>**
+**Response (JSON):**
 
 See [Solution Response Model](#solution-response-model).
 
