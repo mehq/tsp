@@ -54,7 +54,7 @@ cp .env.sample .env
 **Pre-requisites:**
 
 * [Git](https://git-scm.com/downloads)
-* [Python](https://www.python.org/downloads/) `3.9+`
+* [Python](https://www.python.org/downloads/) `3.8+`
 * [RabbitMQ](https://www.rabbitmq.com/download.html) `3+`
 
 Steps:
