@@ -1,5 +1,7 @@
 # tsp
 
+[![ci](https://github.com/mehq/tsp/workflows/ci/badge.svg?branch=master)](https://github.com/mehq/tsp/actions/workflows/ci.yml)
+
 Vehicle routing problem-solving web service.
 
 * [Quickstart](#quickstart)

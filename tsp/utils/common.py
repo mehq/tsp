@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 def retry_with_backoff(
     func: Callable,
     retries: int = 5,
-    backoff_in_seconds: int = 1,
+    backoff_in_seconds: float = 1,
     exceptions: Tuple[Type[Exception], ...] = (Exception,),
 ) -> Any:
     x = 0

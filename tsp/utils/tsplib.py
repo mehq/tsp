@@ -8,14 +8,14 @@ def calculate_distance(from_location: List[float], to_location: List[float]) -> 
     return math.hypot(from_location[0] - to_location[0], from_location[1] - to_location[1])
 
 
-def create_distance_matrix(geocoded_locations: List[List[float]]) -> List[List[float]]:
+def create_distance_matrix(geocoded_locations: List[List[float]]) -> List[List[int]]:
     location_count = len(geocoded_locations)
-    distance_matrix = [[0.0 for _ in range(location_count)] for _ in range(location_count)]
+    distance_matrix = [[0 for _ in range(location_count)] for _ in range(location_count)]
 
     for i, row in enumerate(distance_matrix):
         for j, _ in enumerate(row):
             if i != j:
-                distance_matrix[i][j] = calculate_distance(geocoded_locations[i], geocoded_locations[j])
+                distance_matrix[i][j] = round(calculate_distance(geocoded_locations[i], geocoded_locations[j]))
 
     return distance_matrix
 

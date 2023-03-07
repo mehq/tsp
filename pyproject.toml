@@ -26,7 +26,13 @@ ignore_missing_imports = true
 
 [tool.pytest.ini_options]
 addopts = "-ra --verbose"
-testpaths = ["test"]
+django_debug_mode = "keep"
+DJANGO_SETTINGS_MODULE = "tsp.settings"
+python_files = [
+  "tests.py",
+  "test_*.py",
+  "*_tests.py",
+]
 
 [tool.coverage.run]
 branch = true

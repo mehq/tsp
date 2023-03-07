@@ -12,15 +12,16 @@ deps: ## Install python dependencies
 	python -m pip install --upgrade pip
 	python -m pip install --requirement requirements.txt
 
+devdeps: deps  ## Install python dependencies for development
+	python -m pip install --requirement requirements/development.txt
+
 fmt: ## Format code.
 	black .
 	isort --atomic .
 
 .PHONY: test
 test: ## Run tests.
-	coverage run --source='.' manage.py test
-	coverage report
-	coverage xml
+	pytest -vv -s --cov
 
 help: ## Show this help.
 	@echo 'Usage: make [target]'

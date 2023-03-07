@@ -3,6 +3,7 @@ bandit[toml]==1.7.4
 black==23.1.0
 coverage==7.2.1
 isort[colors]==5.12.0
-mypy==1.0.1
+mypy==1.1.1
 pylint==2.14.5
 pylint-django==2.5.3
+pytest-django==4.5.2
