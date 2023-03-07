@@ -4,14 +4,13 @@ check: ## Check source code issues.
 	mypy --install-types --non-interactive .
 	bandit --recursive . --configfile pyproject.toml
 	find . -iname "*.py" \
+		-not -path "./.git/*" \
 		-not -path "./venv/*" \
-		-not -path "./build/*" \
-		-not -path "./node_modules/*" \
 		-not -path "*/migrations/*" | xargs pylint
 
 deps: ## Install python dependencies
 	python -m pip install --upgrade pip
-	pip install --requirement requirements.txt
+	python -m pip install --requirement requirements.txt
 
 fmt: ## Format code.
 	black .

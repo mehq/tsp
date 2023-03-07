@@ -1,15 +1,31 @@
-import threading
-from typing import Dict
+import logging
+import random
+from time import sleep
+from typing import Any, Callable, Tuple, Type
 
-lock = threading.Lock()
+logger = logging.getLogger(__name__)
 
 
-class Singleton(type):
-    _instances: Dict["Singleton", "Singleton"] = {}
+def retry_with_backoff(
+    func: Callable,
+    retries: int = 5,
+    backoff_in_seconds: int = 1,
+    exceptions: Tuple[Type[Exception], ...] = (Exception,),
+) -> Any:
+    x = 0
 
-    def __call__(cls, *args, **kwargs):
-        if cls not in cls._instances:
-            with lock:
-                if cls not in cls._instances:
-                    cls._instances[cls] = super(Singleton, cls).__call__(*args, **kwargs)
-        return cls._instances[cls]
+    while True:
+        try:
+            return func()
+        except exceptions:
+            if x == retries:
+                logger.error("Max retry reached, re-raising original exception")
+                raise
+
+            sleep_time = backoff_in_seconds * 2**x + random.uniform(0, 1)  # nosec
+
+            sleep(sleep_time)
+
+            logger.warning("Exception encountered, will retry in %.2f seconds", sleep_time)
+
+            x += 1

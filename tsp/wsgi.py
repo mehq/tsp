@@ -11,10 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-from tsp.utils.amqp import AMQPBase
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "tsp.settings")
-
-AMQPBase()
 
 application = get_wsgi_application()

@@ -1,6 +1,6 @@
 #!/bin/bash
 
 python -m pip install --upgrade pip
-pip install --requirement requirements.txt
+python -m pip install --requirement requirements.txt
 
 exec "$@"

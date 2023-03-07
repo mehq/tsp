@@ -1,5 +1,5 @@
 [tool.bandit]
-exclude_dirs = ["migrations", "node_modules", "venv"]
+exclude_dirs = ["migrations", "venv"]
 skips = ["B101"]
 
 [tool.black]
